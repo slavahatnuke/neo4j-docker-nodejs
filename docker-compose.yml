@@ -1,0 +1,16 @@
+app:
+  build: .
+  links:
+   - neo4j
+  ports:
+   - "13000:3000"
+  volumes:
+   - ./app:/app
+  entrypoint: "node app.js"
+
+neo4j:
+  image: neo4j:3.0
+  ports:
+   - "17474:7474"
+  volumes:
+   - ./db:/data
