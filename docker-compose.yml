@@ -1,12 +1,25 @@
-app:
+appbase:
   build: .
+  volumes:
+   - ./app:/app
+
+app:
+  extends:
+    file: docker-compose.yml
+    service: appbase
   links:
    - neo4j
   ports:
    - "13000:3000"
-  volumes:
-   - ./app:/app
-  entrypoint: "node app.js"
+  entrypoint: node app.js
+
+console:
+  extends:
+    file: docker-compose.yml
+    service: appbase
+  links:
+   - neo4j
+  entrypoint: bash
 
 neo4j:
   image: neo4j:3.0
