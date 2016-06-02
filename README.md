@@ -1,3 +1,3 @@
 ## neo4j
 
-neo4j/test
+Login/Password: neo4j/test
