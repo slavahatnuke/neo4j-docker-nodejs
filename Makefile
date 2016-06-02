@@ -1,8 +1,6 @@
 all: dev
 
-hello:
-	echo "HELLO"
-
+## application
 dev:
 	nodemon -x "make reload"
 
@@ -15,8 +13,17 @@ reload: rm
 rm:
 	docker-compose kill app && docker-compose rm --force --all app
 
+stop:
+	docker-compose stop --timeout 3
+
 up:
 	docker-compose up -d app
 
-stop:
-	docker-compose stop --timeout 3
+## docker aliases
+
+build:
+	docker-compose build
+
+ps:
+	docker-compose ps
+
