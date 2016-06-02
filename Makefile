@@ -3,8 +3,20 @@ all: dev
 hello:
 	echo "HELLO"
 
-console:
-	docker-compose run console
-
 dev:
-	nodemon -x "docker-compose kill app && docker-compose rm -f app && docker-compose up app"
+	nodemon -x "make reload"
+
+console:
+	docker-compose run --rm console
+
+reload: rm
+	docker-compose up app
+
+rm:
+	docker-compose kill app && docker-compose rm --force --all app
+
+up:
+	docker-compose up -d app
+
+stop:
+	docker-compose stop --timeout 3

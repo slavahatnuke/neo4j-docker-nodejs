@@ -26,4 +26,4 @@ neo4j:
   ports:
    - "17474:7474"
   volumes:
-   - ./db:/data
+   - ./db/dbms:/data/dbms
