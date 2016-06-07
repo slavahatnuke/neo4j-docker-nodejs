@@ -1,8 +1,13 @@
-all: dev
+all: demo
 
 ## application
-dev:
+demo: setup reload
+
+dev: setup
 	nodemon -x "make reload"
+
+setup:
+	docker-compose run --rm --entrypoint ./setup.sh console
 
 console:
 	docker-compose run --rm console

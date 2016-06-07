@@ -4,22 +4,29 @@ var app = express();
 var neo4j = require('node-neo4j');
 var db = new neo4j('http://neo4j:test@neo4j:7474');
 
-//console.log('insert');
-//db.insertNode({
-//    name: 'Darth Vader',
-//    sex: 'male'
-//},function(err, node){
-//    if(err) throw err;
-//
-//    // Output node properties.
-//    console.log(node.data);
-//
-//    // Output node id.
-//    console.log(node._id);
-//});
+app.get('/load', function (req, res, next) {
+    db.insertNode({
+        name: 'Darth Vader',
+        sex: 'male'
+    }, ['Person'], function (err, node) {
+        if (err) return next(err);
 
-app.get('/', function(req, res){
-    res.send('hello world');
+        res.json(node);
+    });
+});
+
+app.get('/drop', function (req, res, next) {
+    db.cypherQuery("MATCH (n) DETACH DELETE n", function (err, result) {
+        if (err) return next(err);
+        res.json(result);
+    });
+});
+
+app.get('/', function (req, res, next) {
+    db.cypherQuery("MATCH (person:Person) RETURN person", function (err, result) {
+        if (err) return next(err);
+        res.json(result.data);
+    });
 });
 
 app.listen(3000, function () {

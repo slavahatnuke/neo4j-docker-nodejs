@@ -10,7 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.13.4",
-    "neo4j": "^2.0.0-RC2",
     "node-neo4j": "^2.0.3"
   }
 }
