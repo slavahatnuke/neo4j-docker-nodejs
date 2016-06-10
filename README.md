@@ -27,7 +27,7 @@ Please check files to clarify concepts
 - [docker-compose.yml](docker-compose.yml) services configuration
 - [Makefile](Makefile) helper to manage 
 - [app.js](./app/app.js) the simplest node.js app
-- [app.js](./app/view/index.html) the simplest AngularJS app
+- [index.html](./app/view/index.html) the simplest AngularJS app
 
 #### Have a fun! 
 Use microservice and have a fun!
