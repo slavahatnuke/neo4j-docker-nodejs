@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" ng-app="neo4jExample">
+<head>
+  <meta charset="UTF-8">
+  <title>Neo4j example</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+        integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"
+        integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+          integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
+          integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+          crossorigin="anonymous"></script>
+
+  <script>
+    angular
+      .module('neo4jExample', [])
+      .controller('MainCtrl', function ($scope, $http) {
+        $scope.nodes = [];
+
+        $scope.show = function () {
+          $http.get('/persons').then(function (resp) {
+            $scope.nodes = resp.data;
+          });
+        };
+
+        $scope.load = function () {
+          return $http.get('/tools/load').then(function (resp) {
+            $scope.show();
+            return resp;
+          });
+        };
+
+        $scope.drop = function () {
+          $http.get('/tools/drop').then(function () {
+            $scope.nodes = [];
+          });
+        }
+      });
+  </script>
+
+</head>
+
+<body ng-controller="MainCtrl">
+
+<div class="container">
+  <h2>Neo4j example</h2>
+  <a class="btn btn-default" ng-click="load()" role="button">Load</a>
+  <a class="btn btn-default" ng-click="drop()" role="button">Drop</a>
+
+  <div ng-repeat="node in nodes">
+    <pre>{{node | json }}</pre>
+  </div>
+</div>
+
+</body>
+</html>
