@@ -1,4 +1,4 @@
-# Neo4j + docker + docker-compose example
+# Neo4j + docker + docker-compose + node.js example
 
 ## how to start
 just make it: run in terminal `make`
