@@ -7,10 +7,10 @@ dev: setup
 	nodemon -x "make reload"
 
 setup:
-	docker-compose run --rm --entrypoint ./setup.sh console
+	docker-compose run --rm --entrypoint "npm install" app
 
 console:
-	docker-compose run --rm console
+	docker-compose run --rm --entrypoint bash app
 
 reload: rm
 	docker-compose up app
@@ -25,10 +25,6 @@ up:
 	docker-compose up -d app
 
 ## docker aliases
-
-build:
-	docker-compose build
-
 ps:
 	docker-compose ps
 

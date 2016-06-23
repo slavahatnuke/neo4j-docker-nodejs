@@ -1,11 +1,12 @@
 app:
-  build: .
+  image: node:4
   volumes:
    - ./app:/app
   links:
    - neo4j
   ports:
    - "13000:3000"
+  working_dir: /app
   entrypoint: node app.js
 
 neo4j:
@@ -14,11 +15,3 @@ neo4j:
    - "17474:7474"
   volumes:
    - ./db/dbms:/data/dbms
-
-console:
-  build: .
-  volumes:
-   - ./app:/app
-  links:
-   - neo4j
-  entrypoint: bash
