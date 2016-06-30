@@ -1,7 +1,9 @@
 # Neo4j + docker + docker-compose + node.js example
 
 ## how to start
-just make it: run in terminal `make`
+just make it:
+- run terminal
+- `$ make`
 
 ### dependencies:
 - `make`
